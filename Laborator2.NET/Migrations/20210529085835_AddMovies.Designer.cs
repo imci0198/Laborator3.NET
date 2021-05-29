@@ -4,14 +4,16 @@ using Laborator2.NET.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Laborator2.NET.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529085835_AddMovies")]
+    partial class AddMovies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,6 +225,7 @@ namespace Laborator2.NET.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("YearOfRelease")
+                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.HasKey("id");
