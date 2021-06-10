@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Laborator2.NET.Data;
 using Laborator2.NET.Models;
+using Laborator2.NET.ViewModel;
 
 namespace Laborator2.NET.Controllers
 {
@@ -23,14 +24,14 @@ namespace Laborator2.NET.Controllers
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movies>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<MovieViewModel>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.MovieViewModel.ToListAsync();
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movies>> GetMovies(int id)
+        public async Task<ActionResult<MovieViewModel>> GetMovies(int id)
         {
             var movies = await _context.Movies.FindAsync(id);
 
@@ -45,14 +46,14 @@ namespace Laborator2.NET.Controllers
         // PUT: api/Movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovies(int id, Movies movies)
+        public async Task<IActionResult> PutMovies(int id, MovieViewModel movieVM)
         {
-            if (id != movies.id)
+            if (id != movieVM.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(movies).State = EntityState.Modified;
+            _context.Entry(movieVM).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +77,7 @@ namespace Laborator2.NET.Controllers
         // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Movies>> PostMovies(Movies movies)
+        public async Task<ActionResult<MovieViewModel>> PostMovies(Movies movies)
         {
             _context.Movies.Add(movies);
             await _context.SaveChangesAsync();
